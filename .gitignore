@@ -1,0 +1,32 @@
+# Object files
+*.o
+*.ko
+*.obj
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Debug files
+*.dSYM/
+*.pdb
+
+# Text files
+*.txt
+*.log
+*.csv
+
+# IDE specific files
+.vscode/
+.vs/
+*.swp
+*~
+
+# Build directories
+build/
+Debug/
+Release/
+
+# Dependency directories
+vendor/
