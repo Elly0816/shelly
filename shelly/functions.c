@@ -84,4 +84,74 @@ int check_options(int count)
 
 int handle_reading(char *filename, int count)
 {
+
+    if (check_options(count) != 0)
+    {
+        printf("Include a filename! \n");
+        return -1;
+    }
+
+    FILE *fptr = fopen(filename, "r");
+
+    if (fptr == NULL)
+    {
+        perror("Could not open file");
+        printf("Make sure the file %s exists\n", filename);
+        return -1;
+    }
+
+    size_t number_of_chars = 100;
+    char *buffer = (char *)malloc(number_of_chars * sizeof(char));
+
+    if (buffer == NULL)
+    {
+        printf("There was an error creating the buffer!\n");
+        return -1;
+    }
+
+    printf("Reading...\n");
+    while (fgets(buffer, number_of_chars, fptr))
+    {
+        printf("%s", buffer);
+    }
+
+    printf("\nDone");
+    free(buffer);
+    buffer = NULL;
+    fclose(fptr);
+    fptr = NULL;
+    return 0;
+}
+
+size_t get_size(char *filename, int count)
+{
+
+    if (check_options(count) != 0)
+    {
+        printf("Include a filename! \n");
+        return 0;
+    }
+
+    FILE *fptr = fopen(filename, "r");
+    if (fptr == NULL)
+    {
+        printf("There was an error opening the file\n");
+        return 0;
+    }
+
+    size_t position;
+
+    if (fseek(fptr, 0, SEEK_END) != 0)
+    {
+        printf("There was en error seeking through the file\n");
+        return 0;
+    }
+
+    position = ftell(fptr);
+
+    printf("The size of %s is %zu bytes\n", filename, position);
+
+    fclose(fptr);
+    fptr = NULL;
+    return position;
 }
