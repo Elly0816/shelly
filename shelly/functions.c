@@ -51,6 +51,12 @@ int handle_writing(char *filename, int count)
     char *buffer = (char *)malloc(buff_size * sizeof(char));
     size_t characters;
 
+    if (buffer == NULL)
+    {
+        printf("There was an issue allocating memory for the buffer!\n");
+        return -1;
+    }
+
     while (1)
     {
         characters = strlen(fgets(buffer, buff_size - 1, stdin));
